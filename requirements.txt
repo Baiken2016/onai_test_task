@@ -1,0 +1,6 @@
+fastapi==0.99.0
+python-decouple==3.8
+pydantic==1.10.11
+aiohttp-requests==0.2.4
+motor==3.6.0
+beanie==1.26.0
