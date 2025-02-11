@@ -52,8 +52,6 @@ class ChatService:
     async def callback(self, message: WebhookMessage, openrouter_response: LLMResponse):
         async with aiohttp.ClientSession() as session:
             async with session.post(message.callback_url, json={"response": openrouter_response.choices[0].message.content}) as resp:
-                system_message = await Messages(chat_id=message.chat_id, message_text=openrouter_response.choices[0].message.content,
-                                                published_at=datetime.now(), role=Role.SYSTEM)
                 return await resp.text()
     
     async def process_wh_message(self, chat_id: str, message_text: str, published_at: str, callback_url):
