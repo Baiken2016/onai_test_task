@@ -1,21 +1,21 @@
+from enum import Enum
 from beanie import Document, PydanticObjectId
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 
 
 
+
+class Role(Enum):
+    USER = "user"
+    SYSTEM = "system"
+    
+    
 class Messages(Document):
     chat_id: PydanticObjectId
     message_text: str
     published_at: datetime | None = datetime.now()
-    sender_id: PydanticObjectId
-
-
-class MessagesIn(BaseModel):
-    chat_id: PydanticObjectId
-    message_text: str
-    published_at: datetime
-    sender_id: PydanticObjectId
+    role: Role
 
 
 class WebhookMessage(BaseModel):
@@ -23,7 +23,6 @@ class WebhookMessage(BaseModel):
     chat_id: PydanticObjectId
     message_text: str
     published_at: datetime
-    sender_id: PydanticObjectId
     
 
 class Users(Document):

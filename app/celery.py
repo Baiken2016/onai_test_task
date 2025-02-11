@@ -24,6 +24,6 @@ def setup_beanie(**kwargs):
     loop.run_until_complete(init_db())
     
 @celery_app.task
-def process_webhook(chat_id: str, sender_id: str, callback_url: str, message_text: str, published_at: str):
+def process_webhook(chat_id: str, callback_url: str, message_text: str, published_at: str):
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(chat_service.process_wh_message(chat_id, message_text, published_at, sender_id, callback_url))
+    loop.run_until_complete(chat_service.process_wh_message(chat_id, message_text, published_at, callback_url))
